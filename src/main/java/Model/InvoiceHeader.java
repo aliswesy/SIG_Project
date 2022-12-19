@@ -9,7 +9,20 @@ public class InvoiceHeader {
     private String customerName;
     private ArrayList<InvoiceLine> invLine;
 
+    //Constractors start...
+    public InvoiceHeader() {
+    }
 
+    public InvoiceHeader(int invoiceNumber, Date invoiceDate, String customerName, ArrayList<InvoiceLine> invLine) {
+        this.invoiceNumber = invoiceNumber;
+        this.invoiceDate = invoiceDate;
+        this.customerName = customerName;
+        this.invLine = invLine;
+    }
+    //Constractors end...
+    
+
+    //Setter and Getters start...
     public int getInvoiceNumber() {
         return invoiceNumber;
     }
@@ -41,5 +54,5 @@ public class InvoiceHeader {
     public void setInvLine(ArrayList<InvoiceLine> invLine) {
         this.invLine = invLine;
     }
-
+    //Setter and Getters end...
 }
