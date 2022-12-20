@@ -4,6 +4,10 @@
  */
 package View;
 
+import Controller.Controller;
+import Model.InvoiceHeader;
+import java.util.ArrayList;
+
 /**
  *
  * @author needf
@@ -29,7 +33,9 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInvoiceHeader = new javax.swing.JTable();
         btnNewInvoice = new javax.swing.JButton();
+        btnNewInvoice.addActionListener(controller);
         btnDeleteInvoice = new javax.swing.JButton();
+        btnDeleteInvoice.addActionListener(controller);
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -41,12 +47,16 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblInvoiceLines = new javax.swing.JTable();
         btnNewItem = new javax.swing.JButton();
+        btnNewItem.addActionListener(controller);
         btnDeleteItem = new javax.swing.JButton();
+        btnDeleteItem.addActionListener(controller);
         jSeparator1 = new javax.swing.JSeparator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mOpenFile = new javax.swing.JMenuItem();
+        mOpenFile.addActionListener(controller);
         mSaveFile = new javax.swing.JMenuItem();
+        mSaveFile.addActionListener(controller);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -269,4 +279,18 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTable tblInvoiceHeader;
     private javax.swing.JTable tblInvoiceLines;
     // End of variables declaration//GEN-END:variables
+
+    private ArrayList<InvoiceHeader> invoices;
+    private Controller controller = new Controller(this);
+
+    
+    public ArrayList<InvoiceHeader> getInvoices() {
+        return invoices;
+    }
+
+    public void setInvoices(ArrayList<InvoiceHeader> invoices) {
+        this.invoices = invoices;
+    }
+    
+
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class InvoiceHeader {
     private int invoiceNumber;
-    private Date invoiceDate;
+    private String invoiceDate;
     private String customerName;
     private ArrayList<InvoiceLine> invLine;
 
@@ -13,11 +13,10 @@ public class InvoiceHeader {
     public InvoiceHeader() {
     }
 
-    public InvoiceHeader(int invoiceNumber, Date invoiceDate, String customerName, ArrayList<InvoiceLine> invLine) {
+    public InvoiceHeader(int invoiceNumber, String invoiceDate, String customerName) {
         this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
         this.customerName = customerName;
-        this.invLine = invLine;
     }
     //Constractors end...
     
@@ -31,11 +30,11 @@ public class InvoiceHeader {
         this.invoiceNumber = invoiceNumber;
     }
 
-    public Date getInvoiceDate() {
+    public String getInvoiceDate() {
         return invoiceDate;
     }
 
-    public void setInvoiceDate(Date invoiceDate) {
+    public void setInvoiceDate(String invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
 
@@ -55,4 +54,17 @@ public class InvoiceHeader {
         this.invLine = invLine;
     }
     //Setter and Getters end...
+
+    @Override
+    public String toString() {
+        return "InvoiceHeader{" + "invoiceNumber=" + invoiceNumber + ", invoiceDate=" + invoiceDate + ", customerName=" + customerName + ", invLine=" + invLine + '}';
+    }
+    
+    public float getTotalInvocie(){
+        float total = 0;
+        for (InvoiceLine invoiceLine : invLine) {
+            total += invoiceLine.getTotalPrice();
+        }
+        return total;
+    }
 }

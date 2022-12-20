@@ -1,23 +1,24 @@
 package Model;
 
 public class InvoiceLine {
+
+    private int invoiceNum;
     private String itemName;
     private float itemPrice;
     private int count;
-    private int invoiceNum;
 
     //Constractors start...
     public InvoiceLine() {
     }
 
-    public InvoiceLine(String itemName, float itemPrice, int count, int invoiceNum) {
+    public InvoiceLine( int invoiceNum, String itemName, float itemPrice, int count) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.count = count;
         this.invoiceNum = invoiceNum;
     }
     // Constracotrs end...
-    
+
     //Setter and Getters start...
     public int getInvoiceNum() {
         return invoiceNum;
@@ -51,4 +52,13 @@ public class InvoiceLine {
         this.count = count;
     }
     //Setter and Getters end...
+
+    @Override
+    public String toString() {
+        return "InvoiceLine{" + "invoiceNum=" + invoiceNum + ", itemName=" + itemName + ", itemPrice=" + itemPrice + ", count=" + count + '}';
+    }
+    
+    public float getTotalPrice(){
+        return itemPrice * count;
+    }
 }
