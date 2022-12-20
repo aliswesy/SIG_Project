@@ -13,11 +13,17 @@
               <Properties>
                 <Property name="label" type="java.lang.String" value="Open file"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="mOpenFile.addActionListener(controller);&#xd;&#xa;"/>
+              </AuxValues>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mSaveFile">
               <Properties>
                 <Property name="label" type="java.lang.String" value="Save file"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="mSaveFile.addActionListener(controller);&#xd;&#xa;"/>
+              </AuxValues>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -181,11 +187,17 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewInvoiceActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnNewInvoice.addActionListener(controller);&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnDeleteInvoice">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Invoice"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnDeleteInvoice.addActionListener(controller);&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -243,11 +255,17 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewItemActionPerformed"/>
       </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnNewItem.addActionListener(controller);&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnDeleteItem">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete Item"/>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="btnDeleteItem.addActionListener(controller);&#xd;&#xa;"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
       <Properties>

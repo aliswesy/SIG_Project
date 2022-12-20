@@ -1,3 +1,6 @@
+
+import View.MainFrame;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
@@ -9,6 +12,7 @@
 public class SIG {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        MainFrame frame1 = new MainFrame();
+        frame1.setVisible(true);
     }
 }
