@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class InvoiceHeader {
+
     private int invoiceNumber;
     private String invoiceDate;
     private String customerName;
@@ -19,7 +20,6 @@ public class InvoiceHeader {
         this.customerName = customerName;
     }
     //Constractors end...
-    
 
     //Setter and Getters start...
     public int getInvoiceNumber() {
@@ -47,6 +47,9 @@ public class InvoiceHeader {
     }
 
     public ArrayList<InvoiceLine> getInvLine() {
+        if (invLine == null) {
+            invLine = new ArrayList<>();
+        }
         return invLine;
     }
 
@@ -59,12 +62,19 @@ public class InvoiceHeader {
     public String toString() {
         return "InvoiceHeader{" + "invoiceNumber=" + invoiceNumber + ", invoiceDate=" + invoiceDate + ", customerName=" + customerName + ", invLine=" + invLine + '}';
     }
-    
-    public float getTotalInvocie(){
+
+    public float getTotalInvocie() {
         float total = 0;
-        for (InvoiceLine invoiceLine : invLine) {
-            total += invoiceLine.getTotalPrice();
+        if (this.invLine != null) {
+            for (InvoiceLine invoiceLine : invLine) {
+                total += invoiceLine.getTotalPrice();
+            }
         }
+
         return total;
+    }
+    
+    public String getCSV(){
+        return invoiceNumber + "," + invoiceDate + "," + customerName + "\n";
     }
 }

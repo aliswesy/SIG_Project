@@ -61,4 +61,8 @@ public class InvoiceLine {
     public float getTotalPrice(){
         return itemPrice * count;
     }
+    
+        public String getCSV(){
+        return invoiceNum + "," + itemName + "," + itemPrice + "," + count + "\n";
+    }
 }
