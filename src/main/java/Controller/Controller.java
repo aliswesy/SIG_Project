@@ -19,9 +19,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -94,14 +98,19 @@ public class Controller implements ActionListener, ListSelectionListener {
                 //Read lines from Header file...
                 ArrayList<InvoiceHeader> invoices = new ArrayList<>();
                 for (int i = 0; i < headLines.size(); i++) {
-                    String get = headLines.get(i);
-                    String[] headUnits = get.split(",");
-                    int invoiceNumber = Integer.parseInt(headUnits[0]);
-                    String invoiceDate = headUnits[1];
-                    String custName = headUnits[2];
+                    try {
+                        String get = headLines.get(i);
+                        String[] headUnits = get.split(",");
+                        int invoiceNumber = Integer.parseInt(headUnits[0]);
+                        String invoiceDate = headUnits[1];
+                        String custName = headUnits[2];
 
-                    InvoiceHeader invoice = new InvoiceHeader(invoiceNumber, invoiceDate, custName);
-                    invoices.add(invoice);
+                        InvoiceHeader invoice = new InvoiceHeader(invoiceNumber, invoiceDate, custName);
+                        invoices.add(invoice);
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(frame, "Can't read selected line format!", "File Error", JOptionPane.ERROR_MESSAGE);
+
+                    }
                 }
                 //End Read lines from header...
                 //End open 1st file from pc...
@@ -116,14 +125,19 @@ public class Controller implements ActionListener, ListSelectionListener {
                     //Read lines from incoive lines...
                     ArrayList<InvoiceLine> invoiceLines = new ArrayList<>();
                     for (String line : lines) {
-                        String[] lineUnits = line.split(",");
-                        int lineNumber = Integer.parseInt(lineUnits[0]);
-                        String itemName = lineUnits[1];
-                        float itemPrice = Float.parseFloat(lineUnits[2]);
-                        int count = Integer.parseInt(lineUnits[3]);
+                        try {
+                            String[] lineUnits = line.split(",");
+                            int lineNumber = Integer.parseInt(lineUnits[0]);
+                            String itemName = lineUnits[1];
+                            float itemPrice = Float.parseFloat(lineUnits[2]);
+                            int count = Integer.parseInt(lineUnits[3]);
 
-                        InvoiceLine invoiceLine = new InvoiceLine(lineNumber, itemName, itemPrice, count);
-                        invoiceLines.add(invoiceLine);
+                            InvoiceLine invoiceLine = new InvoiceLine(lineNumber, itemName, itemPrice, count);
+                            invoiceLines.add(invoiceLine);
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(frame, "Can't open selected file format!", "File Error", JOptionPane.ERROR_MESSAGE);
+
+                        }
                     }
                     //End Read lines from invocieines...
                     //End open 2st file from pc...
@@ -149,6 +163,7 @@ public class Controller implements ActionListener, ListSelectionListener {
             }
         } catch (IOException exc) {
             exc.printStackTrace();
+            JOptionPane.showMessageDialog(frame, "Can't open selected file format!", "File Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -217,16 +232,34 @@ public class Controller implements ActionListener, ListSelectionListener {
 
     //Add new invocie to invoice header table...
     public void addNewInvoice() {
+        DateFormat df = new SimpleDateFormat("dd-MM-YYYY");
         String date = headerDialog.getFldInvoiceDate().getText();
         String customer = headerDialog.getFldCustName().getText();
         int num = frame.getInvoiceNum() + 1;
 
-        InvoiceHeader newInv = new InvoiceHeader(num, date, customer);
-        frame.getInvoices().add(newInv);
-        frame.getHeaderTable().fireTableDataChanged();
-        headerDialog.setVisible(false);
-        headerDialog.dispose();
-        headerDialog = null;
+        try {
+            String[] dateParts = date.split("-");  // "22-05-2013" -> {"22", "05", "2013"}  xy-qw-20ij
+            if (dateParts.length < 3) {
+                JOptionPane.showMessageDialog(frame, "Please enter valid date (dd-mm-yyyy)!", "Date Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                int day = Integer.parseInt(dateParts[0]);
+                int month = Integer.parseInt(dateParts[1]);
+                int year = Integer.parseInt(dateParts[2]);
+                if (day > 31 || month > 12) {
+                    JOptionPane.showMessageDialog(frame, "Please enter valid date (dd-mm-yyyy)!", "Date Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    df.parse(date);
+                    InvoiceHeader newInv = new InvoiceHeader(num, date, customer);
+                    frame.getInvoices().add(newInv);
+                    frame.getHeaderTable().fireTableDataChanged();
+                    headerDialog.setVisible(false);
+                    headerDialog.dispose();
+                    headerDialog = null;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frame, "Please enter valid date (dd-mm-yyyy)!", "Date Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     //Deleting selected invoice header...
